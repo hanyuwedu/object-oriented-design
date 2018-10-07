@@ -35,6 +35,13 @@ public class Guest {
         LocalDateTime time9 = LocalDateTime.of(2018, 8, 28, 9, 9, 9);
         LocalDateTime time10 = LocalDateTime.of(2018, 8, 28, 10, 10, 10);
         LocalDateTime time11 = LocalDateTime.of(2018, 8, 28, 11, 11, 11);
+        LocalDateTime time12 = LocalDateTime.of(2018, 8, 28, 12, 12, 12);
+        LocalDateTime time13 = LocalDateTime.of(2018, 8, 28, 13, 13, 13);
+        LocalDateTime time14 = LocalDateTime.of(2018, 8, 28, 14, 14, 14);
+        LocalDateTime time15 = LocalDateTime.of(2018, 8, 28, 15, 15, 15);
+        LocalDateTime time16 = LocalDateTime.of(2018, 8, 28, 16, 16, 16);
+        LocalDateTime time17 = LocalDateTime.of(2018, 8, 28, 17, 17, 17);
+        LocalDateTime time18 = LocalDateTime.of(2018, 8, 28, 18, 18, 18);
 
         Ticket ticket1 = parkingLot.park(cla, time1);
         System.out.println(ticket1);
@@ -75,5 +82,29 @@ public class Guest {
         /// Park compact on full size spot
         parkingLot.park(prius, time9);
         parkingLot.showLeftSpots();
+
+        parkingLot.showSpots();
+        System.out.println();
+
+        Ticket ticket3 = parkingLot.leave(bus, time10);
+        System.out.println(ticket3);
+        parkingLot.showLeftSpots();
+        parkingLot.showSpots();
+        System.out.println();
+
+        /// Park a small car into a large spot
+        Ticket ticket4 = parkingLot.park(camery, time11);
+        System.out.println(ticket4);
+        parkingLot.showLeftSpots();
+        parkingLot.showSpots();
+        System.out.println();
+
+
+        parkingLot.leave(prius, time12);
+        parkingLot.showSpots();
+
+        /// No consecutive spots, cannot park a bus
+        parkingLot.park(bus, time13);
+        parkingLot.showSpots();
     }
 }

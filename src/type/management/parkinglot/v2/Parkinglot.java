@@ -17,14 +17,25 @@ import java.util.List;
 import java.util.Map;
 
 public class Parkinglot {
-    List<Spot> spots;
-    Map<Vehicle, Ticket> parkingInfo;
-    IChargingStrategy policy;
+    private List<Spot> spots;
+    private Map<Vehicle, Ticket> parkingInfo;
+    private IChargingStrategy policy;
 
+    /**
+     * 默认为工作日收费标准
+     *
+     * @param smallSpots 停车场的小号停车位
+     * @param largeSpots 停车场的大号停车位
+     */
     public Parkinglot(int smallSpots, int largeSpots) {
         this(smallSpots, largeSpots, new WeekdayPolicy(0.1));
     }
 
+    /**
+     * @param smallSpots 停车场的小号停车位
+     * @param largeSpots
+     * @param policy 停车场的收费标准
+     */
     public Parkinglot(int smallSpots, int largeSpots, IChargingStrategy policy) {
         this.spots = new ArrayList<>();
         this.parkingInfo = new HashMap<>();
@@ -39,6 +50,15 @@ public class Parkinglot {
         }
     }
 
+
+    /**
+     * 为目标车找到车位，并且返回ticket
+     * 若没有合适车位，会抛出NoAvailableSpotException，并且返回null
+     *
+     * @param vehicle 目标车
+     * @param time 停车时间
+     * @return 停车保留的ticket
+     */
     public Ticket park(Vehicle vehicle, LocalDateTime time) {
         Ticket ticket = new Ticket(vehicle);
         List<Spot> spots;
@@ -61,6 +81,13 @@ public class Parkinglot {
         return ticket;
     }
 
+    /**
+     * 目标车离开停车场，并且释放相应停车位
+     *
+     * @param vehicle 目标车
+     * @param time 离开时间
+     * @return 离开更新后的Ticket
+     */
     public Ticket leave(Vehicle vehicle, LocalDateTime time) {
         if (!this.parkingInfo.containsKey(vehicle)) {
             throw new CarNotExistException("Vehicle is not parked in this parkinglot");
@@ -81,6 +108,9 @@ public class Parkinglot {
         return ticket;
     }
 
+    /**
+     * 显示当前所剩车位
+     */
     public void showLeftSpots() {
         int smallSpots = 0, largetSpots = 0;
         for (Spot spot : spots) {
@@ -106,10 +136,28 @@ public class Parkinglot {
         }
     }
 
+    /**
+     * 显示停车场车位示意图
+     */
+    public void showSpots() {
+        System.out.println(this.spots.toString());
+    }
+
+    /**
+     * 根据车的大小找到合适的停车位
+     *
+     * @param vehicle 目标车
+     * @return 目标停车位
+     */
     private List<Spot> findSpots(Vehicle vehicle) {
         List<Spot> spots = new ArrayList<>();
         int spotNeeded = vehicle.getNeededSpot();
 
+        /**
+         * vehicle.availableSpots()会储存一个有序的（从小到大）的停车位列表，
+         * 对于其中的每种车位，需要找到连续的车位
+         * 过程是：记录所需要的车位，如果下一个车位符合条件则继续放入结果集合，如果不符合条件则清空集合并重新计数。
+         */
         for (SpotSize spotSize : vehicle.availableSpots()) {
             int leftSpots = spotNeeded;
 

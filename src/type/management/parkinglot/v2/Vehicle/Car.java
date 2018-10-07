@@ -14,6 +14,7 @@ public class Car extends Vehicle {
     public List<SpotSize> availableSpots() {
         List<SpotSize> availableSpots = new ArrayList<>();
         availableSpots.add(SpotSize.SMALL);
+        availableSpots.add(SpotSize.LARGE);
 
         return availableSpots;
     }

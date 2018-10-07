@@ -32,6 +32,14 @@ public abstract class Spot {
 
     @Override
     public String toString() {
-        return "[" + this.stall + ", " + this.getSpotSize() + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("[" + this.stall + ", " + this.getSpotSize());
+
+        if (!this.isAvailable) {
+            sb.append("<O>");
+        }
+
+        sb.append("]");
+        return sb.toString();
     }
 }

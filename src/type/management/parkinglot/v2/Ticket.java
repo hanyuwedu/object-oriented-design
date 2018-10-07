@@ -19,24 +19,43 @@ public class Ticket {
         this.vehicle = vehicle;
     }
 
+    /**
+     * 为Ticket设置停车时间
+     * @param time 停车时间
+     */
     public void setParkTime(LocalDateTime time) {
         this.parkTime = time;
     }
 
+    /**
+     * 为Ticket设置离开时间
+     * @param time 离开时间
+     */
     public void setLeaveTime(LocalDateTime time) {
         this.leaveTime = time;
     }
 
+    /**
+     * 为Ticket设置spot
+     * @param spot 停车位置
+     */
     public void setSpot(List<Spot> spot) {
         this.spot = spot;
     }
 
+    /**
+     * 根据不同的停车场收费标准设置（返回）收费
+     * 使用strategy design pattern
+     *
+     * @param strategy 所使用的收费标准
+     */
     public void setCost(IChargingStrategy strategy) {
         if (parkTime == null || leaveTime == null) {
             throw new CarNotExistException("This car has not yet leave!");
         }
-        this.cost = strategy.getCost(parkTime, leaveTime);
+        this.cost = strategy.getCost(this.vehicle, parkTime, leaveTime);
     }
+
 
     public Vehicle getVehicle() {
         return vehicle;
