@@ -1,4 +1,4 @@
-package type.reservation.restaurant.v2.slot;
+package type.reservation.restaurant.v2.table;
 
 public enum TableSize {
     LARGE(6),

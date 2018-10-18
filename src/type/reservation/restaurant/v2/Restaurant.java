@@ -1,9 +1,9 @@
 package type.reservation.restaurant.v2;
 
-import type.reservation.restaurant.v2.module.Reservation;
-import type.reservation.restaurant.v2.module.SearchCriteria;
-import type.reservation.restaurant.v2.module.Availability;
-import type.reservation.restaurant.v2.slot.Inventory;
+import type.reservation.restaurant.v2.model.Reservation;
+import type.reservation.restaurant.v2.model.SearchCriteria;
+import type.reservation.restaurant.v2.model.Availability;
+import type.reservation.restaurant.v2.table.Inventory;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class Restaurant {
      * @return collection of all search result
      */
     public List<Availability> search(SearchCriteria searchCriteria) {
-        return this.inventory.searchRange(searchCriteria.getStartTime(),
+        return this.inventory.search(searchCriteria.getStartTime(),
                 searchCriteria.getEndTime(),
                 searchCriteria.getPartySize());
     }

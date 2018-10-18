@@ -1,6 +1,6 @@
-package type.reservation.restaurant.v2.module;
+package type.reservation.restaurant.v2.model;
 
-import type.reservation.restaurant.v2.slot.TableSize;
+import type.reservation.restaurant.v2.table.TableSize;
 
 public class Availability {
     private int fromTime, toTime;

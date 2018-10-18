@@ -1,8 +1,8 @@
-package type.reservation.restaurant.v2.slot;
+package type.reservation.restaurant.v2.table;
 
 import type.reservation.restaurant.v2.exceptions.InvalidSearchCriteriaException;
 import type.reservation.restaurant.v2.exceptions.NotAvailableTimeSlotException;
-import type.reservation.restaurant.v2.module.Availability;
+import type.reservation.restaurant.v2.model.Availability;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Inventory {
     private static final int RESERVATION_PERIOD = 1;
-    private Map<Integer, Map<Integer, Map<TableSize, Integer>>> slots;
+    private Map<Integer, Map<Integer, Map<TableSize, Integer>>> tables;
 
     /**
      * @param openTime starting time to accept reservation
@@ -29,15 +29,15 @@ public class Inventory {
             throw new InvalidSearchCriteriaException("table count is invalid!");
         }
 
-        this.slots = new HashMap<>();
+        this.tables = new HashMap<>();
 
         for (int i = openTime; i <= closeTime - RESERVATION_PERIOD; i+=RESERVATION_PERIOD) {
-            slots.put(i, new HashMap<>());
-            slots.get(i).put(i + RESERVATION_PERIOD, new HashMap<>());
+            tables.put(i, new HashMap<>());
+            tables.get(i).put(i + RESERVATION_PERIOD, new HashMap<>());
 
-            slots.get(i).get(i + RESERVATION_PERIOD).put(TableSize.LARGE, largeTables);
-            slots.get(i).get(i + RESERVATION_PERIOD).put(TableSize.MID, midTables);
-            slots.get(i).get(i + RESERVATION_PERIOD).put(TableSize.SMALL, smallTables);
+            tables.get(i).get(i + RESERVATION_PERIOD).put(TableSize.LARGE, largeTables);
+            tables.get(i).get(i + RESERVATION_PERIOD).put(TableSize.MID, midTables);
+            tables.get(i).get(i + RESERVATION_PERIOD).put(TableSize.SMALL, smallTables);
         }
     }
 
@@ -49,14 +49,14 @@ public class Inventory {
      * @param tableSize reservation tableSize
      * @return whether there are tables left accordingly
      */
-    public boolean search(int fromTime, int toTime, TableSize tableSize) {
-        if (this.slots.get(fromTime) == null ||
-                this.slots.get(fromTime).get(toTime) == null ||
-                this.slots.get(fromTime).get(toTime).get(tableSize) == null) {
+    public boolean isAvailable(int fromTime, int toTime, TableSize tableSize) {
+        if (this.tables.get(fromTime) == null ||
+                this.tables.get(fromTime).get(toTime) == null ||
+                this.tables.get(fromTime).get(toTime).get(tableSize) == null) {
             throw new InvalidSearchCriteriaException("Input search request is invalid!");
         }
 
-        return this.slots.get(fromTime).get(toTime).get(tableSize) > 0;
+        return this.tables.get(fromTime).get(toTime).get(tableSize) > 0;
     }
 
     /**
@@ -65,16 +65,16 @@ public class Inventory {
      * @param startTime starting time in a search range
      * @param endTime end time in a search range
      * @param partySize party size of given search
-     * @return all candidates that meets search request
+     * @return all candidates that meets the search request
      */
-    public List<Availability> searchRange(int startTime, int endTime, int partySize) {
+    public List<Availability> search(int startTime, int endTime, int partySize) {
         List<Availability> results = new ArrayList<>();
 
-        for (Integer fromTime : this.slots.keySet()) {
+        for (Integer fromTime : this.tables.keySet()) {
             if (fromTime >= startTime) {
-                for (Integer toTime : this.slots.get(fromTime).keySet()) {
+                for (Integer toTime : this.tables.get(fromTime).keySet()) {
                     if (toTime <= endTime) {
-                        Map<TableSize, Integer> availableTables = slots.get(fromTime).get(toTime);
+                        Map<TableSize, Integer> availableTables = tables.get(fromTime).get(toTime);
                         for (TableSize tableSize : availableTables.keySet()) {
                             if (tableSize.getSize() >= partySize && availableTables.get(tableSize) > 0) {
                                 results.add(new Availability(fromTime, toTime, tableSize));
@@ -118,25 +118,25 @@ public class Inventory {
      * @param count count to update inventory
      */
     private void update(int fromTime, int toTime, TableSize tableSize, int count) {
-        if (this.slots.get(fromTime) == null ||
-                this.slots.get(fromTime).get(toTime) == null ||
-                this.slots.get(fromTime).get(toTime).get(tableSize) == null) {
+        if (this.tables.get(fromTime) == null ||
+                this.tables.get(fromTime).get(toTime) == null ||
+                this.tables.get(fromTime).get(toTime).get(tableSize) == null) {
             throw new InvalidSearchCriteriaException("Input update request is invalid!");
         }
 
-        if (this.slots.get(fromTime).get(toTime).get(tableSize) + count < 0) {
+        if (this.tables.get(fromTime).get(toTime).get(tableSize) + count < 0) {
             throw new NotAvailableTimeSlotException("Current request has no spots left!");
         }
 
-        this.slots.get(fromTime).get(toTime).put(tableSize,
-                this.slots.get(fromTime).get(toTime).get(tableSize) + count);
+        this.tables.get(fromTime).get(toTime).put(tableSize,
+                this.tables.get(fromTime).get(toTime).get(tableSize) + count);
     }
 
     public void print() {
-        for (int fromTime : this.slots.keySet()) {
-            for (int toTime : this.slots.get(fromTime).keySet()) {
-                for (TableSize tableSize : this.slots.get(fromTime).get(toTime).keySet()) {
-                    int count = this.slots.get(fromTime).get(toTime).get(tableSize);
+        for (int fromTime : this.tables.keySet()) {
+            for (int toTime : this.tables.get(fromTime).keySet()) {
+                for (TableSize tableSize : this.tables.get(fromTime).get(toTime).keySet()) {
+                    int count = this.tables.get(fromTime).get(toTime).get(tableSize);
 
                     System.out.println("From " + fromTime + " to " + toTime +
                             ", there are " + count + " " + tableSize.toString() + " tables left.");

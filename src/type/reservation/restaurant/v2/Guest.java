@@ -1,10 +1,10 @@
 package type.reservation.restaurant.v2;
 
-import type.reservation.restaurant.v2.module.Reservation;
-import type.reservation.restaurant.v2.module.SearchCriteria;
-import type.reservation.restaurant.v2.module.Availability;
-import type.reservation.restaurant.v2.slot.Inventory;
-import type.reservation.restaurant.v2.slot.TableSize;
+import type.reservation.restaurant.v2.model.Reservation;
+import type.reservation.restaurant.v2.model.SearchCriteria;
+import type.reservation.restaurant.v2.model.Availability;
+import type.reservation.restaurant.v2.table.Inventory;
+import type.reservation.restaurant.v2.table.TableSize;
 
 import java.util.List;
 
@@ -48,14 +48,14 @@ public class Guest {
         inventory.print();
         System.out.println();
 
-        System.out.println(inventory.search(1, 2, TableSize.LARGE));
-        System.out.println(inventory.search(1, 2, TableSize.SMALL));
-        System.out.println(inventory.search(1, 2, TableSize.MID));
+        System.out.println(inventory.isAvailable(1, 2, TableSize.LARGE));
+        System.out.println(inventory.isAvailable(1, 2, TableSize.SMALL));
+        System.out.println(inventory.isAvailable(1, 2, TableSize.MID));
         System.out.println();
 
-        System.out.println(inventory.searchRange(1, 3, 5));
-        System.out.println(inventory.searchRange(1, 2, 3));
-        System.out.println(inventory.searchRange(2, 4, 2));
+        System.out.println(inventory.search(1, 3, 5));
+        System.out.println(inventory.search(1, 2, 3));
+        System.out.println(inventory.search(2, 4, 2));
         System.out.println();
 
         inventory.decreaseSlot(1, 2, TableSize.MID);
@@ -66,10 +66,10 @@ public class Guest {
 //        inventory.decreaseSlot(1, 2, TableSize.MID);
 
         /// Should only return large tables
-        System.out.println(inventory.searchRange(1, 2, 3));
+        System.out.println(inventory.search(1, 2, 3));
 
         inventory.increaseSlot(1, 2, TableSize.MID);
         /// Should return large and mid tables
-        System.out.println(inventory.searchRange(1, 2, 3));
+        System.out.println(inventory.search(1, 2, 3));
     }
 }

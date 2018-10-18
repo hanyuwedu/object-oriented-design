@@ -1,7 +1,7 @@
-package type.reservation.restaurant.v2.module;
+package type.reservation.restaurant.v2.model;
 
 import type.reservation.restaurant.v2.Customer;
-import type.reservation.restaurant.v2.slot.TableSize;
+import type.reservation.restaurant.v2.table.TableSize;
 
 public class Reservation {
     private Customer customer;

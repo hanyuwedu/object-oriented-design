@@ -1,4 +1,4 @@
-package type.reservation.restaurant.v2.module;
+package type.reservation.restaurant.v2.model;
 
 public class SearchCriteria {
     private int startTime, endTime, partySize;
