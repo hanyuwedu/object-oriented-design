@@ -38,13 +38,13 @@ public class Hotel {
      * @return a reservation made by customer
      */
     public Reservation reserve(Customer customer, Availability availability) {
-        this.inventory.decreaseRoom(availability.getCheckin(),
-                availability.getCheckout().minusDays(1),
+        this.inventory.decreaseRoom(availability.getFrom(),
+                availability.getTo(),
                 availability.getRoomType());
 
         Reservation reservation = new Reservation(customer,
-                availability.getCheckin(),
-                availability.getCheckout(),
+                availability.getFrom(),
+                availability.getTo().plusDays(1),
                 availability.getRoomType(),
                 availability.getPrice());
 

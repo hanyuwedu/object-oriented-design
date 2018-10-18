@@ -5,13 +5,13 @@ import type.reservation.hotel.v2.room.RoomType;
 import java.time.LocalDate;
 
 public class Availability {
-    private LocalDate checkin, checkout;
+    private LocalDate from, to;
     private RoomType roomType;
     private Double price;
 
-    public Availability(LocalDate checkin, LocalDate checkout, RoomType roomType) {
-        this.checkin = checkin;
-        this.checkout = checkout;
+    public Availability(LocalDate from, LocalDate to, RoomType roomType) {
+        this.from = from;
+        this.to = to;
         this.roomType = roomType;
     }
 
@@ -19,12 +19,12 @@ public class Availability {
         this.price = price;
     }
 
-    public LocalDate getCheckin() {
-        return checkin;
+    public LocalDate getFrom() {
+        return from;
     }
 
-    public LocalDate getCheckout() {
-        return checkout;
+    public LocalDate getTo() {
+        return to;
     }
 
     public RoomType getRoomType() {
@@ -39,9 +39,9 @@ public class Availability {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Booking from ");
-        sb.append(this.checkin);
+        sb.append(this.from);
         sb.append(" to ");
-        sb.append(this.checkout);
+        sb.append(this.to);
         sb.append(" on a ");
         sb.append(this.roomType.toString());
 

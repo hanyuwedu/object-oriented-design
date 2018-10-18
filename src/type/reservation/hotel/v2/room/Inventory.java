@@ -60,7 +60,7 @@ public class Inventory {
             }
 
             if (notFull) {
-                Availability availability = new Availability(from, to.plusDays(1), roomType);
+                Availability availability = new Availability(from, to, roomType);
                 availability.setPrice(this.getPrice(from, to, roomType));
 
                 availabilities.add(availability);
