@@ -10,6 +10,12 @@ public class InitialState extends AbstractVendingMachineState {
         super(vendingMachine);
     }
 
+    /**
+     * 为VendingMachine选中即将购买的商品，并且将其切换到AfterSelectionState
+     *
+     * @param productClass 产品的class type
+     * @throws Exception
+     */
     @Override
     public void select(Class<? extends Product> productClass) throws Exception {
         if (!this.vendingMachine.contains(productClass)) {
@@ -20,16 +26,27 @@ public class InitialState extends AbstractVendingMachineState {
         this.vendingMachine.setState(AfterSelectionState.class);
     }
 
+    /**
+     * 禁用
+     *
+     * @param amount 输入的金额
+     */
     @Override
     public void pay(Double amount) {
         throw new ItemNotSelectedException();
     }
 
+    /**
+     * 禁用
+     */
     @Override
     public Product get() {
         throw new ItemNotSelectedException();
     }
 
+    /**
+     * 无效
+     */
     @Override
     public void cancel() {
     }

@@ -21,6 +21,16 @@ public class Inventory {
         }
     }
 
+    /**
+     * 根据input class返回对应的product
+     *
+     * @param productClass 产品的class type
+     * @return 根据这个class type产生的class
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     */
     public Product get(Class<? extends Product> productClass)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         if (!this.inventory.containsKey(productClass) || this.inventory.get(productClass) <= 0) {
@@ -31,14 +41,31 @@ public class Inventory {
         }
     }
 
+    /**
+     * 为vending machine填充产品数量
+     *
+     * @param productClass 产品的class type
+     * @param amount refill的数量
+     */
     public void refill(Class<? extends Product> productClass, int amount) {
         this.updateStorage(productClass, amount);
     }
 
+    /**
+     * 为指定产品减少一个库存
+     *
+     * @param productClass product的class type
+     */
     public void reduce(Class<? extends Product> productClass) {
         this.updateStorage(productClass, -1);
     }
 
+
+    /** 为指定产品更新库存数量
+     *
+     * @param productClass 产品的class type
+     * @param amount 更新的库存数量
+     */
     private void updateStorage(Class<? extends Product> productClass, int amount) {
         if (!this.inventory.containsKey(productClass)) {
             throw new NotEnoughItemException("Selected item is not available");
@@ -51,6 +78,12 @@ public class Inventory {
         }
     }
 
+    /**
+     * 查看指定产品的库存
+     *
+     * @param productClass 产品的class type
+     * @return 对应的库存数量
+     */
     public int checkStorage(Class<? extends Product> productClass) {
         if (!this.inventory.containsKey(productClass)) {
             return 0;
@@ -59,6 +92,12 @@ public class Inventory {
         return this.inventory.get(productClass);
     }
 
+    /**
+     * 查看指定产品是否有库存
+     *
+     * @param productClass 产品的class type
+     * @return 指定产品是否有库存
+     */
     public boolean contains(Class<? extends Product> productClass) {
         return this.checkStorage(productClass) > 0;
     }

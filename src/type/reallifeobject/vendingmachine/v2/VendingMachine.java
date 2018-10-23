@@ -27,18 +27,39 @@ public class VendingMachine {
         this.setState(InitialState.class);
     }
 
+    /**
+     * 为该vending machine选择产品
+     *
+     * @param productClass 产品的class type
+     * @throws Exception
+     */
     public void select(Class<? extends Product> productClass) throws Exception {
         this.currentState.select(productClass);
     }
 
+    /**
+     * 为vending machine输入金额
+     *
+     * @param amount 输入的金额
+     * @throws Exception
+     */
     public void pay(Double amount) throws Exception {
         this.currentState.pay(amount);
     }
 
+    /**
+     * 从vending machine中取出产品
+     *
+     * @return 即将取得的产品
+     * @throws Exception
+     */
     public Product get() throws Exception {
         return this.currentState.get();
     }
 
+    /**
+     * 取消vending machine正在进行的交易
+     */
     public void cancel() {
         this.currentState.cancel();
     }
@@ -55,14 +76,29 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * 为vending machine填充产品数量
+     *
+     * @param productClass 产品的class type
+     * @param amount refill的数量
+     */
     public void refill(Class<? extends Product> productClass, int amount) {
         this.inventory.refill(productClass, amount);
     }
 
+    /**
+     * 为指定产品减少一个库存
+     *
+     * @param productClass product的class type
+     */
     public void reduce(Class<? extends Product> productClass) {
         this.inventory.reduce(productClass);
     }
 
+
+    /**
+     * 取消当前vending machine的一切交易，切回原始状态
+     */
     public void clearRequest() {
         if (this.getPayment() != 0) {
             System.out.println("$" + this.getPayment() + " will be refunded.");
@@ -71,6 +107,12 @@ public class VendingMachine {
         this.setSelectProduct(null);
     }
 
+    /**
+     * 查看指定产品是否有库存
+     *
+     * @param productClass 产品的class type
+     * @return 指定产品是否有库存
+     */
     public boolean contains(Class<? extends Product> productClass) {
         return this.inventory.contains(productClass);
     }

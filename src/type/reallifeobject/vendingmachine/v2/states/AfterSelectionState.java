@@ -11,6 +11,11 @@ public class AfterSelectionState extends AbstractVendingMachineState{
         super(vendingMachine);
     }
 
+    /**
+     * 为VendingMachine选中即将购买的商品
+     *
+     * @param productClass 产品的class type
+     */
     @Override
     public void select(Class<? extends Product> productClass) throws Exception {
         if (!this.vendingMachine.contains(productClass)) {
@@ -20,6 +25,10 @@ public class AfterSelectionState extends AbstractVendingMachineState{
         System.out.println(productClass.getDeclaredConstructor().newInstance().getName() + " is selected.");
     }
 
+    /**
+     * 更新VendingMachine的付款金额，如果付款金额大于购买商品金额，则切换到AfterPaymentState
+     * @param amount 输入的金额
+     */
     @Override
     public void pay(Double amount) throws Exception {
         if (amount <= 0) {
@@ -33,11 +42,19 @@ public class AfterSelectionState extends AbstractVendingMachineState{
         }
     }
 
+    /**
+     * 禁用
+     *
+     * @throws Exception
+     */
     @Override
     public Product get() {
         throw new PaymentNotSuccessException();
     }
 
+    /**
+     * 取消交易，将售货机的当前信息清空，并将其切换到InitialState
+     */
     @Override
     public void cancel() {
         this.vendingMachine.clearRequest();
