@@ -4,6 +4,7 @@ import type.reallifeobject.vendingmachine.v2.exceptions.CannotSelectItemExceptio
 import type.reallifeobject.vendingmachine.v2.VendingMachine;
 import type.reallifeobject.vendingmachine.v2.exceptions.InvalidRequestException;
 import type.reallifeobject.vendingmachine.v2.products.Product;
+import type.reallifeobject.vendingmachine.v2.products.ProductType;
 
 public class AfterPaymentState extends AbstractVendingMachineState{
     public AfterPaymentState(VendingMachine vendingMachine) {
@@ -13,10 +14,10 @@ public class AfterPaymentState extends AbstractVendingMachineState{
     /**
      * 无效
      *
-     * @param productClass 产品的class type
+     * @param productType 产品的type
      */
     @Override
-    public void select(Class<? extends Product> productClass) {
+    public void select(ProductType productType) {
         throw new CannotSelectItemException("Payment has been gone through. Please cancel the transaction first.");
     }
 
@@ -34,28 +35,17 @@ public class AfterPaymentState extends AbstractVendingMachineState{
      * 取出选中商品，找出余额。将售货机的当前信息清空，并将其切换到InitialState并将其切换到InitialState
      *
      * @return 选中的商品
-     * @throws Exception
      */
     @Override
-    public Product get() throws Exception {
-        Product product = this.vendingMachine.getSelectProduct().getDeclaredConstructor().newInstance();
+    public Product get() {
+        ProductType productType = this.vendingMachine.getSelectedProductType();
+        Product product = productType.getProduct();
         this.vendingMachine.setPayment(this.vendingMachine.getPayment() - product.getPrice());
 
-        /*
-         * 是一种好的写法吗？
-         */
-        try {
-            return product;
-        } finally {
-            this.vendingMachine.clearRequest();
-            this.vendingMachine.reduce(product.getClass());
-            this.vendingMachine.setState(InitialState.class);
-        }
-
-//        this.vendingMachine.clearRequest();
-//        this.vendingMachine.reduce(product.getClass());
-//        this.vendingMachine.setState(InitialState.class);
-//        return product;
+        this.vendingMachine.clearRequest();
+        this.vendingMachine.reduce(productType);
+        this.vendingMachine.setState(InitialState.class);
+        return product;
     }
 
     /**

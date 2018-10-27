@@ -2,6 +2,10 @@ package type.reallifeobject.vendingmachine.v2;
 
 import type.reallifeobject.vendingmachine.v2.products.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Guest {
     public static void main(String[] args) throws Exception {
 //        inventoryTest();
@@ -9,17 +13,20 @@ public class Guest {
     }
 
     public static void vendingmachingTest() throws Exception {
-        VendingMachine vs = new VendingMachine(BottleWater.class, Coke.class, Sprite.class);
+        List<ProductType> productTypeList = new ArrayList<>();
+        productTypeList.addAll(Arrays.asList(ProductType.values()));
+
+        VendingMachine vs = new VendingMachine(productTypeList);
         vs.printInfo();
         System.out.println();
 
-        vs.refill(Coke.class, 3);
-        vs.refill(BottleWater.class, 2);
-        vs.refill(Sprite.class, 1);
+        vs.refill(ProductType.COKE, 3);
+        vs.refill(ProductType.BOTTLEWATER, 2);
+        vs.refill(ProductType.SPRITE, 1);
         vs.printInfo();
         System.out.println();
 
-        vs.select(Coke.class);
+        vs.select(ProductType.COKE);
         vs.printInfo();
         System.out.println();
 
@@ -42,9 +49,9 @@ public class Guest {
         /// should throw exception
 //        vs.pay(3.00);
 
-        vs.select(Sprite.class);
+        vs.select(ProductType.SPRITE);
         vs.printInfo();
-        vs.select(BottleWater.class);
+        vs.select(ProductType.BOTTLEWATER);
         vs.printInfo();
         System.out.println();
 
@@ -56,7 +63,7 @@ public class Guest {
         vs.printInfo();
         System.out.println();
 
-        vs.select(Sprite.class);
+        vs.select(ProductType.SPRITE);
         vs.pay(2.0);
         Product sprite = vs.get();
         System.out.println(sprite);
@@ -64,35 +71,38 @@ public class Guest {
         System.out.println();
 
         /// throw exception
-//        vs.select(Sprite.class);
-        vs.refill(Sprite.class, 2);
+//        vs.select(ProductType.SPRITE);
+        vs.refill(ProductType.SPRITE, 2);
         vs.printInfo();
-        vs.select(Sprite.class);
+        vs.select(ProductType.SPRITE);
         vs.printInfo();
     }
 
     public static void inventoryTest() throws Exception {
-        Inventory inventory = new Inventory(BottleWater.class, Coke.class, Sprite.class);
+        List<ProductType> productTypeList = new ArrayList<>();
+        productTypeList.addAll(Arrays.asList(ProductType.values()));
+
+        Inventory inventory = new Inventory(productTypeList);
         System.out.println(inventory);
         System.out.println();
 
-        inventory.refill(Coke.class, 3);
-        inventory.refill(BottleWater.class, 2);
-        inventory.refill(Sprite.class, 1);
-        System.out.println(inventory.contains(Sprite.class));
+        inventory.refill(ProductType.COKE, 3);
+        inventory.refill(ProductType.BOTTLEWATER, 2);
+        inventory.refill(ProductType.SPRITE, 1);
+        System.out.println(inventory.contains(ProductType.SPRITE));
         System.out.println(inventory);
 
-        Product sprite = inventory.get(Sprite.class);
+        Product sprite = inventory.get(ProductType.SPRITE);
         System.out.println(sprite);
         System.out.println(inventory);
-        System.out.println(inventory.contains(Sprite.class));
+        System.out.println(inventory.contains(ProductType.SPRITE));
         System.out.println();
 
         /// Should throw exception
-//        sprite = inventory.get(Sprite.class);
+//        sprite = inventory.get(ProductType.SPRITE);
 
-        Product coke1 = inventory.get(Coke.class);
-        Product coke2 = inventory.get(Coke.class);
+        Product coke1 = inventory.get(ProductType.COKE);
+        Product coke2 = inventory.get(ProductType.COKE);
         System.out.println(coke1 == coke2);
         System.out.println(inventory);
     }

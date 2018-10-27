@@ -4,6 +4,7 @@ import type.reallifeobject.vendingmachine.v1.exceptions.NotEnoughItemException;
 import type.reallifeobject.vendingmachine.v2.VendingMachine;
 import type.reallifeobject.vendingmachine.v2.exceptions.ItemNotSelectedException;
 import type.reallifeobject.vendingmachine.v2.products.Product;
+import type.reallifeobject.vendingmachine.v2.products.ProductType;
 
 public class InitialState extends AbstractVendingMachineState {
     public InitialState(VendingMachine vendingMachine) {
@@ -13,16 +14,15 @@ public class InitialState extends AbstractVendingMachineState {
     /**
      * 为VendingMachine选中即将购买的商品，并且将其切换到AfterSelectionState
      *
-     * @param productClass 产品的class type
-     * @throws Exception
+     * @param productType 产品的type
      */
     @Override
-    public void select(Class<? extends Product> productClass) throws Exception {
-        if (!this.vendingMachine.contains(productClass)) {
+    public void select(ProductType productType) {
+        if (!this.vendingMachine.contains(productType)) {
             throw new NotEnoughItemException();
         }
-        this.vendingMachine.setSelectProduct(productClass);
-        System.out.println(productClass.getDeclaredConstructor().newInstance().getName() + " is selected.");
+        this.vendingMachine.setSelectedProductType(productType);
+        System.out.println(productType.getName() + " is selected.");
         this.vendingMachine.setState(AfterSelectionState.class);
     }
 

@@ -1,32 +1,30 @@
 package type.reallifeobject.vendingmachine.v2.states;
 
 import type.reallifeobject.vendingmachine.v2.products.Product;
+import type.reallifeobject.vendingmachine.v2.products.ProductType;
 
 public interface IVendingMachineState {
     /**
      * 为该vending machine选择产品
      *
-     * @param productClass 产品的class type
-     * @throws Exception
+     * @param productType 产品的type
      */
-    void select(Class<? extends Product> productClass) throws Exception;
+    void select(ProductType productType);
 
 
     /**
      * 为vending machine输入金额
      *
      * @param amount 输入的金额
-     * @throws Exception
      */
-    void pay(Double amount) throws Exception;
+    void pay(Double amount);
 
     /**
      * 从vending machine中取出产品
      *
      * @return 即将取得的产品
-     * @throws Exception
      */
-    Product get() throws Exception;
+    Product get();
 
 
     /**

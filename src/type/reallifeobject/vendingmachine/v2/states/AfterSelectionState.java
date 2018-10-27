@@ -5,6 +5,7 @@ import type.reallifeobject.vendingmachine.v2.exceptions.NotEnoughItemException;
 import type.reallifeobject.vendingmachine.v2.exceptions.PaymentNotSuccessException;
 import type.reallifeobject.vendingmachine.v2.VendingMachine;
 import type.reallifeobject.vendingmachine.v2.products.Product;
+import type.reallifeobject.vendingmachine.v2.products.ProductType;
 
 public class AfterSelectionState extends AbstractVendingMachineState{
     public AfterSelectionState(VendingMachine vendingMachine) {
@@ -14,38 +15,37 @@ public class AfterSelectionState extends AbstractVendingMachineState{
     /**
      * 为VendingMachine选中即将购买的商品
      *
-     * @param productClass 产品的class type
+     * @param productType 产品的type
      */
     @Override
-    public void select(Class<? extends Product> productClass) throws Exception {
-        if (!this.vendingMachine.contains(productClass)) {
+    public void select(ProductType productType) {
+        if (!this.vendingMachine.contains(productType)) {
             throw new NotEnoughItemException();
         }
-        this.vendingMachine.setSelectProduct(productClass);
-        System.out.println(productClass.getDeclaredConstructor().newInstance().getName() + " is selected.");
+        this.vendingMachine.setSelectedProductType(productType);
+        System.out.println(productType.getName() + " is selected.");
     }
 
     /**
      * 更新VendingMachine的付款金额，如果付款金额大于购买商品金额，则切换到AfterPaymentState
+     *
      * @param amount 输入的金额
      */
     @Override
-    public void pay(Double amount) throws Exception {
+    public void pay(Double amount) {
         if (amount <= 0) {
             throw new InvalidRequestException("Payment does not go through.");
         }
 
         this.vendingMachine.setPayment(this.vendingMachine.getPayment() + amount);
         if (this.vendingMachine.getPayment()
-                >= this.vendingMachine.getSelectProduct().getDeclaredConstructor().newInstance().getPrice()) {
+                >= this.vendingMachine.getSelectedProductType().getPrice()) {
             this.vendingMachine.setState(AfterPaymentState.class);
         }
     }
 
     /**
      * 禁用
-     *
-     * @throws Exception
      */
     @Override
     public Product get() {

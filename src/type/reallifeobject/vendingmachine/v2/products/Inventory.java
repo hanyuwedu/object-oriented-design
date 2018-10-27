@@ -3,120 +3,103 @@ package type.reallifeobject.vendingmachine.v2.products;
 import type.reallifeobject.vendingmachine.v2.exceptions.InvalidRequestException;
 import type.reallifeobject.vendingmachine.v2.exceptions.NotEnoughItemException;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Inventory {
-    /*
-     * 写了茫茫多的Class<? extends Product>，可以写成generic吗？
-     */
-    private Map<Class<? extends Product>, Integer> inventory;
 
-    public Inventory(Class<? extends Product> ...productClassList) {
+    private Map<ProductType, Integer> inventory;
+
+    public Inventory(List<ProductType> productTypeList) {
         this.inventory = new HashMap<>();
-        for (Class<? extends Product> productClass : productClassList) {
-            this.inventory.put(productClass, 0);
+        for (ProductType productType : productTypeList) {
+            this.inventory.put(productType, 0);
         }
     }
 
     /**
-     * 根据input class返回对应的product
+     * 根据input type返回对应的product
      *
-     * @param productClass 产品的class type
+     * @param productType 产品的type
      * @return 根据这个class type产生的class
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
      */
-    public Product get(Class<? extends Product> productClass)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        if (!this.inventory.containsKey(productClass) || this.inventory.get(productClass) <= 0) {
+    public Product get(ProductType productType) {
+        if (!this.inventory.containsKey(productType) || this.inventory.get(productType) <= 0) {
             throw new NotEnoughItemException("Selected item is not available");
         } else {
-            this.inventory.put(productClass, this.inventory.get(productClass) - 1);
-            return productClass.getDeclaredConstructor().newInstance();
+            this.inventory.put(productType, this.inventory.get(productType) - 1);
+            return productType.getProduct();
         }
     }
 
     /**
      * 为vending machine填充产品数量
      *
-     * @param productClass 产品的class type
+     * @param productType 产品的 type
      * @param amount refill的数量
      */
-    public void refill(Class<? extends Product> productClass, int amount) {
-        this.updateStorage(productClass, amount);
+    public void refill(ProductType productType, int amount) {
+        this.updateStorage(productType, amount);
     }
 
     /**
      * 为指定产品减少一个库存
      *
-     * @param productClass product的class type
+     * @param productType product的 type
      */
-    public void reduce(Class<? extends Product> productClass) {
-        this.updateStorage(productClass, -1);
+    public void reduce(ProductType productType) {
+        this.updateStorage(productType, -1);
     }
 
 
     /** 为指定产品更新库存数量
      *
-     * @param productClass 产品的class type
+     * @param productType 产品的 type
      * @param amount 更新的库存数量
      */
-    private void updateStorage(Class<? extends Product> productClass, int amount) {
-        if (!this.inventory.containsKey(productClass)) {
+    private void updateStorage(ProductType productType, int amount) {
+        if (!this.inventory.containsKey(productType)) {
             throw new NotEnoughItemException("Selected item is not available");
         } else {
-            int updatedStorage = this.inventory.get(productClass) + amount;
+            int updatedStorage = this.inventory.get(productType) + amount;
             if (updatedStorage < 0) {
                 throw new InvalidRequestException("Input amount is invalid!");
             }
-            this.inventory.put(productClass, updatedStorage);
+            this.inventory.put(productType, updatedStorage);
         }
     }
 
     /**
      * 查看指定产品的库存
      *
-     * @param productClass 产品的class type
+     * @param productType 产品的 type
      * @return 对应的库存数量
      */
-    public int checkStorage(Class<? extends Product> productClass) {
-        if (!this.inventory.containsKey(productClass)) {
+    public int checkStorage(ProductType productType) {
+        if (!this.inventory.containsKey(productType)) {
             return 0;
         }
 
-        return this.inventory.get(productClass);
+        return this.inventory.get(productType);
     }
 
     /**
      * 查看指定产品是否有库存
      *
-     * @param productClass 产品的class type
+     * @param productType 产品的 type
      * @return 指定产品是否有库存
      */
-    public boolean contains(Class<? extends Product> productClass) {
-        return this.checkStorage(productClass) > 0;
+    public boolean contains(ProductType productType) {
+        return this.checkStorage(productType) > 0;
     }
 
     @Override
     public String toString() {
         Map<String, Integer> storage = inventory.entrySet().stream()
                 .collect(Collectors.toMap(
-                        entry -> {
-                            try {
-                                /*
-                                 * 每次为了取得一个参数都需要很长的表述建立新对象，以及抛一大堆的异常。有何好的解决方案？
-                                 */
-                                return entry.getKey().getDeclaredConstructor().newInstance().getName();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return "";
-                        },
+                        entry -> entry.getKey().getName(),
                         entry -> entry.getValue()));
         return storage.toString();
     }
