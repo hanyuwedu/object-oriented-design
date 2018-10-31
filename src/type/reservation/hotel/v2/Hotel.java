@@ -66,7 +66,7 @@ public class Hotel {
 
         this.inventory.increaseRoom(from, to, roomType);
         System.out.println(reservation.toString() + " has been cancelled. " +
-                "Amount of " + reservation.getPrice() +  "will be refund.");
+                "Amount of " + reservation.getPrice() +  " will be refund.");
     }
 
     /**

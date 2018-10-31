@@ -1,22 +1,20 @@
 package type.reallifeobject.vendingmachine.v2.products;
 
-import type.reservation.hotel.v2.exceptions.InvalidRequestException;
-
-import java.lang.reflect.InvocationTargetException;
+import java.util.function.Supplier;
 
 public enum  ProductType {
-    BOTTLEWATER("Bottle Water", 1.00, BottleWater.class),
-    COKE("Coke", 1.25, Coke.class),
-    SPRITE("Sprite", 1.25, Sprite.class);
+    BOTTLEWATER("Bottle Water", 1.00, () -> new BottleWater()),
+    COKE("Coke", 1.25, () -> new Coke()),
+    SPRITE("Sprite", 1.25, () -> new Sprite());
 
     private String name;
     private double price;
-    private Class<? extends Product> productClass;
+    private Supplier<Product> productSupplier;
 
-    ProductType(String name, double price, Class<? extends Product> productClass) {
+    ProductType(String name, double price, Supplier<Product> productSupplier) {
         this.name = name;
         this.price = price;
-        this.productClass = productClass;
+        this.productSupplier = productSupplier;
     }
 
     public String getName() {
@@ -31,18 +29,6 @@ public enum  ProductType {
      * @return a product object based on product type
      */
     public Product getProduct() {
-        try {
-            return this.productClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-        throw new InvalidRequestException("product type is not selected!");
+        return productSupplier.get();
     }
 }
