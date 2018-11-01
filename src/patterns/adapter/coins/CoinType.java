@@ -1,4 +1,4 @@
-package patterns.adapter;
+package patterns.adapter.coins;
 
 public enum CoinType {
     PENNY(1.0),

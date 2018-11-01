@@ -1,4 +1,4 @@
-package patterns.adapter;
+package patterns.adapter.coins;
 
 public abstract class Coin {
     public abstract CoinType getCoinType();

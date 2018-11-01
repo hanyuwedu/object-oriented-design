@@ -1,5 +1,10 @@
 package patterns.adapter;
 
+import patterns.adapter.Items.BottleWater;
+import patterns.adapter.Items.Coke;
+import patterns.adapter.coins.Nickle;
+import patterns.adapter.coins.Penny;
+
 public class Guest {
     public static void main(String[] args) {
         Coke cokeItem = new Coke();

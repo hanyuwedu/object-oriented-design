@@ -1,6 +1,6 @@
-package patterns.adapter;
+package patterns.adapter.Items;
 
-public abstract class SellItems {
+public abstract class Product {
     public abstract Double getPrice();
     public abstract String getProductName();
 }

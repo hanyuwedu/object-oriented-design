@@ -1,6 +1,9 @@
 package patterns.adapter;
 
-public class CoinAdapter extends SellItems {    /// Need to extends/implement server API object, which must be either an interface or an abstract class
+import patterns.adapter.Items.Product;
+import patterns.adapter.coins.Coin;
+
+public class CoinAdapter extends Product {    /// Need to extends/implement server API object, which must be either an interface or an abstract class
 
     Coin coin;  /// let adaptive user object be in the field
 
@@ -18,6 +21,6 @@ public class CoinAdapter extends SellItems {    /// Need to extends/implement se
 
     @Override
     public Double getPrice() {
-        return null;    /// let not suitable method return null
+        return this.coin.getValue();
     }
 }

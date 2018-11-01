@@ -1,6 +1,6 @@
-package patterns.adapter;
+package patterns.adapter.Items;
 
-public class Coke extends SellItems {
+public class Coke extends Product {
     @Override
     public Double getPrice() {
         return 1.25;

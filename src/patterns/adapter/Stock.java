@@ -1,5 +1,7 @@
 package patterns.adapter;
 
+import patterns.adapter.Items.Product;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,23 +9,23 @@ import java.util.Map;
  * This object list the product and its storage
  */
 public class Stock {
-    private Map<SellItems, Integer> storage;
+    private Map<Product, Integer> storage;
 
     public Stock() {
         this.storage = new HashMap();
     }
 
-    public void add(SellItems sellItems, int amount) {
-        if (this.storage.containsKey(sellItems)) {
-            storage.put(sellItems, storage.get(sellItems) + amount);
+    public void add(Product product, int amount) {
+        if (this.storage.containsKey(product)) {
+            storage.put(product, storage.get(product) + amount);
         } else {
-            storage.put(sellItems, amount);
+            storage.put(product, amount);
         }
     }
 
-    public int checkAmout(SellItems sellItems) {
-        if (storage.containsKey(sellItems)) {
-            return storage.get(sellItems);
+    public int checkAmout(Product product) {
+        if (storage.containsKey(product)) {
+            return storage.get(product);
         } else {
             return 0;
         }
