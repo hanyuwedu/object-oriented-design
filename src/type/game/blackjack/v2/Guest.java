@@ -4,7 +4,7 @@ import type.game.blackjack.v2.cards.Card;
 import type.game.blackjack.v2.cards.Point;
 import type.game.blackjack.v2.cards.Suite;
 import type.game.blackjack.v2.roles.Dealer;
-import type.game.blackjack.v2.roles.Hand;
+import type.game.blackjack.v2.cards.Hand;
 import type.game.blackjack.v2.roles.Player;
 import type.game.blackjack.v2.util.Utility;
 

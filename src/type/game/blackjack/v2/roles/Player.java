@@ -1,6 +1,7 @@
 package type.game.blackjack.v2.roles;
 
 import type.game.blackjack.v2.Table;
+import type.game.blackjack.v2.cards.Hand;
 import type.game.blackjack.v2.exceptions.InvalidGameException;
 import type.game.blackjack.v2.exceptions.InvalidTossException;
 

@@ -1,7 +1,4 @@
-package type.game.blackjack.v2.roles;
-
-import type.game.blackjack.v2.cards.Card;
-import type.game.blackjack.v2.cards.Point;
+package type.game.blackjack.v2.cards;
 
 import java.util.ArrayList;
 import java.util.List;
