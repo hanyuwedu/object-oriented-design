@@ -1,17 +1,14 @@
-package patterns.state;
+package patterns.behavioral.state.states;
 
-import java.util.Random;
+import patterns.behavioral.state.ATM;
+import patterns.behavioral.state.account.Account;
 
 /// Insert card state support deposit operation
-public class InsertCardState implements State {
-    /// The constructor needs a caller class in the field to change state
-    private ATM atm;
-
-    /// For test convenience
+public class InsertCardState extends AbstractState {
     private static int trial = 0;
 
     public InsertCardState(ATM atm) {
-        this.atm = atm;
+        super(atm);
     }
 
     @Override
@@ -39,7 +36,7 @@ public class InsertCardState implements State {
     public boolean inputPassword() {
         if (trial >= 2) {
             /// Change state after a milestone operation
-            this.atm.changeToValidPasswordState();
+            this.atm.changeState(ValidPasswordState.class);
             return true;
         } else {
             trial++;

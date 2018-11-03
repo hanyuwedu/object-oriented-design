@@ -1,4 +1,4 @@
-package patterns.state;
+package patterns.behavioral.state.account;
 
 public class Account {
     Double balance;

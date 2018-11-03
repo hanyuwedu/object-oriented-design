@@ -1,12 +1,12 @@
-package patterns.state;
+package patterns.behavioral.state.states;
+
+import patterns.behavioral.state.ATM;
+import patterns.behavioral.state.account.Account;
 
 /// Valid passoword state support all operations
-public class ValidPasswordState implements State {
-    /// The constructor needs a caller class in the field to change state
-    ATM atm;
-
+public class ValidPasswordState extends AbstractState {
     public ValidPasswordState(ATM atm) {
-        this.atm = atm;
+        super(atm);
     }
 
     @Override

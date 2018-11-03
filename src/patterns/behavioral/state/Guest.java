@@ -1,4 +1,6 @@
-package patterns.state;
+package patterns.behavioral.state;
+
+import patterns.behavioral.state.account.Account;
 
 public class Guest {
     public static void main(String[] args) {

@@ -1,7 +1,10 @@
-package patterns.state;
+package patterns.behavioral.state;
+
+import patterns.behavioral.state.account.Account;
+import patterns.behavioral.state.states.*;
 
 public class ATM {
-    private State currentState;
+    private AbstractState currentState;
     private Account account;
 
     /// Initialize all states in field:
@@ -18,16 +21,14 @@ public class ATM {
     }
 
     /// State changing methods:
-    public void changeToInitializeState() {
-        this.currentState = this.initialState;
-    }
-
-    public void changeToInsertCardState() {
-        this.currentState = this.insertCardState;
-    }
-
-    public void changeToValidPasswordState() {
-        this.currentState = this.validPasswordState;
+    public void changeState(Class<? extends AbstractState> stateClass) {
+        if (stateClass.equals(InitialState.class)) {
+            this.currentState = this.initialState;
+        } else if (stateClass.equals(InsertCardState.class)) {
+            this.currentState = this.insertCardState;
+        } else if (stateClass.equals(ValidPasswordState.class)) {
+            this.currentState = this.validPasswordState;
+        }
     }
 
     public void setAccount(Account account) {

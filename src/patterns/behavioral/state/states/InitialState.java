@@ -1,17 +1,15 @@
-package patterns.state;
+package patterns.behavioral.state.states;
 
-import java.util.Random;
+import patterns.behavioral.state.ATM;
+import patterns.behavioral.state.account.Account;
 
 /// Initial state can not process any request
-public class InitialState implements State {
-    /// The constructor needs a caller class in the field to change state
-    private ATM atm;
-
+public class InitialState extends AbstractState {
     /// For test convenience
     private static int trial = 0;
 
     public InitialState(ATM atm) {
-        this.atm = atm;
+        super(atm);
     }
 
     @Override
@@ -43,7 +41,7 @@ public class InitialState implements State {
             this.atm.setAccount(account);
 
             /// Change state after a milestone operation
-            this.atm.changeToInsertCardState();
+            this.atm.changeState(InsertCardState.class);
             return true;
         } else {
             trial++;
