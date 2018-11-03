@@ -1,4 +1,4 @@
-package patterns.strategy;
+package patterns.strategy.elevator;
 
 public class Request {
     int floor;

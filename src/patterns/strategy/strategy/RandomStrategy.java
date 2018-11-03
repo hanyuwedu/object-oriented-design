@@ -1,4 +1,7 @@
-package patterns.strategy;
+package patterns.strategy.strategy;
+
+import patterns.strategy.elevator.Elevator;
+import patterns.strategy.elevator.Request;
 
 import java.util.List;
 import java.util.Random;
