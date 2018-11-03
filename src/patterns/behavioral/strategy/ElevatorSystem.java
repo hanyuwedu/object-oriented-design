@@ -1,8 +1,8 @@
-package patterns.strategy;
+package patterns.behavioral.strategy;
 
-import patterns.strategy.elevator.Elevator;
-import patterns.strategy.elevator.Request;
-import patterns.strategy.strategy.IStrategy;
+import patterns.behavioral.strategy.elevator.Elevator;
+import patterns.behavioral.strategy.elevator.Request;
+import patterns.behavioral.strategy.strategy.IStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

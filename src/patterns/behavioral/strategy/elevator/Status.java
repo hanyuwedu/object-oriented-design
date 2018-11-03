@@ -1,4 +1,4 @@
-package patterns.strategy.elevator;
+package patterns.behavioral.strategy.elevator;
 
 public enum Status {
     UP,

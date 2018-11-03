@@ -1,7 +1,7 @@
-package patterns.strategy.strategy;
+package patterns.behavioral.strategy.strategy;
 
-import patterns.strategy.elevator.Elevator;
-import patterns.strategy.elevator.Request;
+import patterns.behavioral.strategy.elevator.Elevator;
+import patterns.behavioral.strategy.elevator.Request;
 
 import java.util.List;
 import java.util.Random;

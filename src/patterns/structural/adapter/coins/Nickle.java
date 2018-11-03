@@ -1,4 +1,4 @@
-package patterns.adapter.coins;
+package patterns.structural.adapter.coins;
 
 public class Nickle extends Coin {
     CoinType type;

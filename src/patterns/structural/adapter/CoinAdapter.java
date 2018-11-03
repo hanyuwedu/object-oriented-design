@@ -1,7 +1,7 @@
-package patterns.adapter;
+package patterns.structural.adapter;
 
-import patterns.adapter.Items.Product;
-import patterns.adapter.coins.Coin;
+import patterns.structural.adapter.Items.Product;
+import patterns.structural.adapter.coins.Coin;
 
 public class CoinAdapter extends Product {    /// Need to extends/implement server API object, which must be either an interface or an abstract class
 

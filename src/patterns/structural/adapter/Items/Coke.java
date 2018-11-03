@@ -1,4 +1,4 @@
-package patterns.adapter.Items;
+package patterns.structural.adapter.Items;
 
 public class Coke extends Product {
     @Override

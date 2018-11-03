@@ -1,4 +1,4 @@
-package patterns.strategy.elevator;
+package patterns.behavioral.strategy.elevator;
 
 import java.util.ArrayList;
 import java.util.List;

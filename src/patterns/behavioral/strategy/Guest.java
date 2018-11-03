@@ -1,10 +1,10 @@
-package patterns.strategy;
+package patterns.behavioral.strategy;
 
-import patterns.strategy.elevator.Elevator;
-import patterns.strategy.elevator.Request;
-import patterns.strategy.elevator.Status;
-import patterns.strategy.strategy.RandomStrategy;
-import patterns.strategy.strategy.StrategyFactory;
+import patterns.behavioral.strategy.elevator.Elevator;
+import patterns.behavioral.strategy.elevator.Request;
+import patterns.behavioral.strategy.elevator.Status;
+import patterns.behavioral.strategy.strategy.RandomStrategy;
+import patterns.behavioral.strategy.strategy.StrategyFactory;
 
 public class Guest {
     public static void main(String[] args) {

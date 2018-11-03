@@ -1,6 +1,6 @@
-package patterns.adapter;
+package patterns.structural.adapter;
 
-import patterns.adapter.Items.Product;
+import patterns.structural.adapter.Items.Product;
 
 import java.util.HashMap;
 import java.util.Map;

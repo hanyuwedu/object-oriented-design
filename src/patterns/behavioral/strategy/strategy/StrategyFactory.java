@@ -1,4 +1,4 @@
-package patterns.strategy.strategy;
+package patterns.behavioral.strategy.strategy;
 
 public class StrategyFactory {
     private static StrategyFactory factory;

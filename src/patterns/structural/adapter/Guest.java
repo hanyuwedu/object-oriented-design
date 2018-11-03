@@ -1,9 +1,9 @@
-package patterns.adapter;
+package patterns.structural.adapter;
 
-import patterns.adapter.Items.BottleWater;
-import patterns.adapter.Items.Coke;
-import patterns.adapter.coins.Nickle;
-import patterns.adapter.coins.Penny;
+import patterns.structural.adapter.Items.BottleWater;
+import patterns.structural.adapter.Items.Coke;
+import patterns.structural.adapter.coins.Nickle;
+import patterns.structural.adapter.coins.Penny;
 
 public class Guest {
     public static void main(String[] args) {
