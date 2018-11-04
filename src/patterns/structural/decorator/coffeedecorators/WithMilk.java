@@ -1,4 +1,6 @@
-package patterns.decorator;
+package patterns.structural.decorator.coffeedecorators;
+
+import patterns.structural.decorator.Coffee;
 
 import java.util.List;
 

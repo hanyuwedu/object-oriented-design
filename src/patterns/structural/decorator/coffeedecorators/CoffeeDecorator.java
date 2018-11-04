@@ -1,9 +1,11 @@
-package patterns.decorator;
+package patterns.structural.decorator.coffeedecorators;
+
+import patterns.structural.decorator.Coffee;
 
 import java.util.List;
 
-public class CoffeeDecorator extends Coffee {
-    protected Coffee baseCoffee;
+public abstract class CoffeeDecorator implements Coffee {
+    protected final Coffee baseCoffee;
 
     protected CoffeeDecorator(Coffee baseCoffee) {  /// Constructor to be protected to be extended
         this.baseCoffee = baseCoffee;
