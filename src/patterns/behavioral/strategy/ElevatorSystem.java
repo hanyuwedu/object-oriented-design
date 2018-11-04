@@ -2,7 +2,7 @@ package patterns.behavioral.strategy;
 
 import patterns.behavioral.strategy.elevator.Elevator;
 import patterns.behavioral.strategy.elevator.Request;
-import patterns.behavioral.strategy.strategy.IStrategy;
+import patterns.behavioral.strategy.strategies.IStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

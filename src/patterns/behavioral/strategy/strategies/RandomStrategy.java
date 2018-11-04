@@ -1,4 +1,4 @@
-package patterns.behavioral.strategy.strategy;
+package patterns.behavioral.strategy.strategies;
 
 import patterns.behavioral.strategy.elevator.Elevator;
 import patterns.behavioral.strategy.elevator.Request;

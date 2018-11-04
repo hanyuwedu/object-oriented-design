@@ -3,8 +3,8 @@ package patterns.behavioral.strategy;
 import patterns.behavioral.strategy.elevator.Elevator;
 import patterns.behavioral.strategy.elevator.Request;
 import patterns.behavioral.strategy.elevator.Status;
-import patterns.behavioral.strategy.strategy.RandomStrategy;
-import patterns.behavioral.strategy.strategy.StrategyFactory;
+import patterns.behavioral.strategy.strategies.RandomStrategy;
+import patterns.behavioral.strategy.strategies.StrategyFactory;
 
 public class Guest {
     public static void main(String[] args) {
