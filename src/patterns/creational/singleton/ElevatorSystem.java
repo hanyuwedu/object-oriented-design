@@ -1,4 +1,4 @@
-package patterns.singleton;
+package patterns.creational.singleton;
 
 public class ElevatorSystem {
     private static ElevatorSystem elevatorSystem;   /// need to be static
