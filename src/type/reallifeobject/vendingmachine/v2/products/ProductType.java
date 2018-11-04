@@ -2,7 +2,7 @@ package type.reallifeobject.vendingmachine.v2.products;
 
 import java.util.function.Supplier;
 
-public enum  ProductType {
+public enum ProductType {
     BOTTLEWATER("Bottle Water", 1.00, () -> new BottleWater()),
     COKE("Coke", 1.25, () -> new Coke()),
     SPRITE("Sprite", 1.25, () -> new Sprite());

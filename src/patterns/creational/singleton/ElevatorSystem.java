@@ -1,16 +1,16 @@
 package patterns.creational.singleton;
 
 public class ElevatorSystem {
-    private static ElevatorSystem elevatorSystem;   /// need to be static
+    private static ElevatorSystem _elevatorSystem;   /// need to be static
 
     private ElevatorSystem() { }    /// Privatize constructor
 
     public static ElevatorSystem getSingleton() {
-        if (elevatorSystem == null) {
-            elevatorSystem = new ElevatorSystem();
+        if (_elevatorSystem == null) {
+            _elevatorSystem = new ElevatorSystem();
         }
 
-        return elevatorSystem;
+        return _elevatorSystem;
     }
 
     public void move() {
