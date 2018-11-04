@@ -1,4 +1,7 @@
-package patterns.factory;
+package patterns.creational.factory.readers;
+
+import patterns.creational.factory.books.Book;
+import patterns.creational.factory.readers.Reader;
 
 public class MobiReader implements Reader {
     @Override

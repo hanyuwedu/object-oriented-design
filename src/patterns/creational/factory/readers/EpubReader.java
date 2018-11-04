@@ -1,4 +1,6 @@
-package patterns.factory;
+package patterns.creational.factory.readers;
+
+import patterns.creational.factory.books.Book;
 
 public class EpubReader implements Reader {
     @Override

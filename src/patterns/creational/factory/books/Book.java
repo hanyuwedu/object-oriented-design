@@ -1,4 +1,4 @@
-package patterns.factory;
+package patterns.creational.factory.books;
 
 public abstract class Book {
     public abstract Format getFormat();

@@ -1,4 +1,4 @@
-package patterns.factory;
+package patterns.creational.factory.books;
 
 public enum Format {
     MOBI,

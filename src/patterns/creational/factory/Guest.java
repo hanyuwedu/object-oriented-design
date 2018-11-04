@@ -1,4 +1,12 @@
-package patterns.factory;
+package patterns.creational.factory;
+
+import patterns.creational.factory.books.Book;
+import patterns.creational.factory.books.HeadFirstDesignPattern;
+import patterns.creational.factory.readers.MobiReader;
+import patterns.creational.factory.books.TestDrivenDevelopment;
+import patterns.creational.factory.readers.EpubReader;
+import patterns.creational.factory.readers.Reader;
+import patterns.creational.factory.readers.ReaderFactory;
 
 public class Guest {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package patterns.factory;
+package patterns.creational.factory.books;
 
 public class TestDrivenDevelopment extends Book {
     @Override
