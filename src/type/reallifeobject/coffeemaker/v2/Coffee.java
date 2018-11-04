@@ -1,4 +1,4 @@
-package type.reallifeobject.coffeemaker.v2.coffee;
+package type.reallifeobject.coffeemaker.v2;
 
 import java.util.List;
 

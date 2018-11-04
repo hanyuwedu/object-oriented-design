@@ -1,6 +1,5 @@
 package type.reallifeobject.coffeemaker.v2;
 
-import type.reallifeobject.coffeemaker.v2.coffee.Coffee;
 import type.reallifeobject.coffeemaker.v2.coffee.Decaf;
 import type.reallifeobject.coffeemaker.v2.coffee.Espresso;
 import type.reallifeobject.coffeemaker.v2.decorators.WithChocolate;

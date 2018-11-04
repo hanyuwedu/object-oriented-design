@@ -1,6 +1,6 @@
 package type.reallifeobject.coffeemaker.v2.decorators;
 
-import type.reallifeobject.coffeemaker.v2.coffee.Coffee;
+import type.reallifeobject.coffeemaker.v2.Coffee;
 
 import java.util.List;
 

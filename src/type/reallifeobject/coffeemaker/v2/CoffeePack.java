@@ -1,7 +1,5 @@
 package type.reallifeobject.coffeemaker.v2;
 
-import type.reallifeobject.coffeemaker.v2.coffee.Coffee;
-
 public class CoffeePack {
     Coffee coffeeBase;
     int neededChocolate;

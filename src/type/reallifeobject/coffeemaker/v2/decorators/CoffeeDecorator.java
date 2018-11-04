@@ -1,7 +1,7 @@
 package type.reallifeobject.coffeemaker.v2.decorators;
 
 import type.reallifeobject.coffeemaker.v2.exceptions.BaseNotSelectedException;
-import type.reallifeobject.coffeemaker.v2.coffee.Coffee;
+import type.reallifeobject.coffeemaker.v2.Coffee;
 
 public abstract class CoffeeDecorator implements Coffee {
     protected final Coffee coffee;
